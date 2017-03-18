@@ -1,0 +1,13 @@
+- set collaborators
+- make sure everyone clones master
+- issues and boards
+	- when you are done with your task send it for review
+
+- git branch html_index(feature branch)
+- git push origin html_index(modifies your branch)
+- create pull request, assign a person to look at your code
+- if no issues merge branch
+- git status
+- git checkout master
+- if people have been modifying master
+	-pull from master first, then
