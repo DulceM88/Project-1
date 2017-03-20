@@ -1,0 +1,220 @@
+.logo-car {
+  height: auto;
+  width: 75px;
+  float: left;
+  margin-top: 0px;
+  padding: none;
+  position: relative;
+}
+
+
+.navbar-default {
+  background-image:-webkit-linear-gradient(top,#fff 0,#f8f8f8 100%);
+  background-image:-o-linear-gradient(top,#fff 0,#f8f8f8 100%);
+  background-image:-webkit-gradient(linear,left top,left bottom,from(#fff),to(#f8f8f8));
+  background-image:linear-gradient(to bottom,#fff 0,#f8f8f8 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff8f8f8', GradientType=0);
+  filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  background-repeat:repeat-x;
+  border-radius:4px;
+  -webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
+}
+a.navbar-brand.navbar-link{
+  color: white;
+  font-size: 22px;
+  font-style: italic;
+}
+.header-blue {
+  background:linear-gradient(135deg, #172a74, #21a9af);
+  background-color:#184e8e;
+  padding-bottom:1px;
+  font-family:'Source Sans Pro', sans-serif;
+}
+
+.header-blue .action-button, .header-blue .action-button:active {
+  border:1px solid rgba(255,255,255,0.7);
+  border-radius:20px;
+  color:#ebeff1;
+  box-shadow:none;
+  text-shadow:none;
+  padding:6px 15px;
+  background:transparent;
+  transition:background-color 0.25s;
+  outline:none;
+}
+.header-blue .navbar {
+  background:transparent;
+  padding-top:12px;
+  padding-bottom:10px;
+  color:#fff;
+  border-radius:0;
+  box-shadow:none;
+  border:none;
+}
+
+
+body {
+  background:linear-gradient(135deg, #172a74, #21a9af);
+  background-color:#184e8e;
+  padding-bottom:120px;
+  font-family:'Source Sans Pro', sans-serif;
+}
+.welcome-p, .welcome-header {
+  color: white;
+  margin: 0px 50px 30px 50px;
+  font-weight: lighter;
+}
+.welcome-p{
+  font-size: 18px;
+
+}
+.navbar-header {
+  color: white;
+}
+#display-map {
+  padding: 30px;
+}
+
+/*Input page  */
+.control-label, .start-address, .end-address {
+  color: white;
+}
+
+@media (max-width:767px) {
+  .header-blue {
+    padding-bottom:80px;
+  }
+}
+
+
+
+@media (max-width:767px) {
+  .header-blue .navbar {
+    padding-top:0;
+    padding-bottom:0;
+  }
+}
+
+@media (max-width:767px) {
+  .header-blue .navbar .navbar-header {
+    padding-top:10px;
+    padding-bottom:10px;
+  }
+}
+
+@media (max-width:767px) {
+{
+    margin-bottom:20px;
+  }
+}
+
+
+.header-blue .action-button:hover {
+  color:#fff;
+}
+
+.header-blue .action-button.btn-lg {
+  padding:7px 18px;
+}
+
+.header-blue .navbar .navbar-form label {
+  color:#ccc;
+}
+
+
+@media (max-width:767px) {
+  .header-blue .navbar .navbar-form .search-field {
+    display:inline-block;
+    width:80%;
+  }
+}
+
+
+@media (max-width:767px) {
+  .header-blue .hero {
+    margin-top:20px;
+    text-align:center;
+  }
+}
+
+
+
+@media (max-width:991px) {
+  .header-blue .hero h1 {
+    margin-top:0;
+    margin-bottom:15px;
+    line-height:1.4;
+  }
+}
+
+
+
+.footer-basic {
+  padding:40px 0;
+  background-color:#ffffff;
+  color:#4b4c4d;
+}
+
+.footer-basic ul {
+  padding:0;
+  list-style:none;
+  text-align:center;
+  font-size:18px;
+  line-height:1.6;
+  margin-bottom:0;
+}
+
+.footer-basic li {
+  padding:0 10px;
+}
+
+.footer-basic ul a {
+  color:inherit;
+  text-decoration:none;
+  opacity:0.8;
+}
+
+.footer-basic ul a:hover {
+  opacity:1;
+}
+
+.footer-basic .social {
+  text-align:center;
+  padding-bottom:25px;
+}
+
+.footer-basic .social > a {
+  font-size:24px;
+  width:40px;
+  height:40px;
+  line-height:40px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  border:1px solid #ccc;
+  margin:0 8px;
+  color:inherit;
+  opacity:0.75;
+}
+
+.footer-basic .social > a:hover {
+  opacity:0.9;
+}
+
+.footer-basic .copyright {
+  margin-top:15px;
+  text-align:center;
+  font-size:13px;
+  color:#aaa;
+  margin-bottom:0;
+}
+
+div#main-section.container {
+  /*background:linear-gradient(135deg, #172a74, #21a9af);*/
+  /*background-color:#184e8e;*/
+  /*padding-bottom:120px;*/
+  color:#f0f0f0;
+  font-family:'Source Sans Pro', sans-serif;
+}
+
