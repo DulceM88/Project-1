@@ -1,40 +1,27 @@
-      var map;
-      function initMap() {
-        var startPoint = new google.maps.LatLng(34.0522, -118.2437),
-          endPoint = new google.maps.LatLng(34.0430, -118.2673),
-      myOptions = {
-              zoom: 7,
-              center: startPoint
-            },
+$("#place").hide();
+    // CREATE MAP
+var map;
 
-        map = new google.maps.Map(document.getElementById('map'), myOptions),
-          // Put in coordinates for Los Angeles
-          // center: {lat: 34.0522, lng: -118.2437},
-          // Higher numbers zoom in more
-          // zoom: 10
-        // }),
+function initMap() {
+  var myOptions = {
+    zoom: 11,
+    center: {lat: 34.0522, lng: -118.2437}
+  },
+  map = new google.maps.Map(document.getElementById('map'), myOptions);
+  directionsService = new google.maps.DirectionsService;
+  directionsDisplay = new google.maps.DirectionsRenderer({
+    map: map
+  });
+};
 
-        directionsService = new google.maps.DirectionsService,
-        directionsDisplay = new google.maps.DirectionsRenderer({
-          map: map
-  //       }),
-    // markerA = new google.maps.Marker({
-  //           position: startPoint,
-  //           title: "Starting Point",
-  //           label: "Starting Point",
-  //           map: map
-  //       }),
-  //       markerB = new google.maps.Marker({
-  //           position: endPoint,
-  //           title: "Ending Point",
-  //           label: "Ending Point",
-  //           map: map
-        });
+$("#submitButton").on("click", function(){
+  $(".userNav").hide();
+  $("#place").show();
+        var startPoint = $("#startPoint").val().trim();
+        var endPoint = $("#endPoint").val().trim();
+        var place = $("#place").val().trim();
     calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint);
-
-}
-
-
+      });
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint) {
     directionsService.route({
@@ -50,21 +37,4 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, startPoi
             window.alert('Directions request failed due to ' + status);
         }
     });
-}
-
-initMap();
-/*    // CREATE TEST MARKER
-        var losAngeles = {lat: 34.0522, lng: -118.2437};
-        var marker = new google.maps.Marker({
-          position: losAngeles,
-          map: map,
-          title: 'test'
-        });
-    // SHOW INFO WHEN MARKER IS CLICKED
-      var markerInfo = new google.maps.InfoWindow({
-        content: 'A'
-      });
-      marker.addListener('click', function() {
-        markerInfo.open(map, marker);
-      })*/
-      // }
+};
