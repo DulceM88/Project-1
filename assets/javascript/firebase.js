@@ -16,8 +16,22 @@
   $("#submit").on("click", function(event){
   	event.preventDefault();
 
-  	var username = 
+  	var userName = $("#userName").val().trim();
+  	var password = $("#password").val().trim();
+  	//var favoritePlaces = $("#addStop").val().trim();
 
+  var newUser = {
+  	name: userName,
+  	password: password,
+  	//favorites: favoritePlaces
+
+  };
+
+  database.ref().push(newUser);
+
+  	console.log(newUser.name);
+  	console.log(newUser.password);
+  	//console.log(newUser.favoritePlaces);
 
 
   });
