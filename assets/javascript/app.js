@@ -1,10 +1,10 @@
       var map;
       function initMap() {
-        var pointA = new google.maps.LatLng(34.0522, -118.2437),
-          pointB = new google.maps.LatLng(34.0430, -118.2673),
+        var startPoint = new google.maps.LatLng(34.0522, -118.2437),
+          endPoint = new google.maps.LatLng(34.0430, -118.2673),
       myOptions = {
               zoom: 7,
-              center: pointA
+              center: startPoint
             },
 
         map = new google.maps.Map(document.getElementById('map'), myOptions),
@@ -19,27 +19,27 @@
           map: map
   //       }),
     // markerA = new google.maps.Marker({
-  //           position: pointA,
-  //           title: "point A",
-  //           label: "A",
+  //           position: startPoint,
+  //           title: "Starting Point",
+  //           label: "Starting Point",
   //           map: map
   //       }),
   //       markerB = new google.maps.Marker({
-  //           position: pointB,
-  //           title: "point B",
-  //           label: "B",
+  //           position: endPoint,
+  //           title: "Ending Point",
+  //           label: "Ending Point",
   //           map: map
         });
-    calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
+    calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint);
 
 }
 
 
 
-function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+function calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint) {
     directionsService.route({
-        origin: pointA,
-        destination: pointB,
+        origin: startPoint,
+        destination: endPoint,
         avoidTolls: true,
         avoidHighways: false,
         travelMode: google.maps.TravelMode.DRIVING
