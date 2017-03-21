@@ -1,29 +1,70 @@
-<<<<<<< HEAD
-// Example direction and places api with api key
-/*
-var directionsQueryURL = https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key=AIzaSyDegJxVf_X3LfYHpbD6xnUJiy-3NXit8hI
+      var map;
+      function initMap() {
+        var pointA = new google.maps.LatLng(34.0522, -118.2437),
+          pointB = new google.maps.LatLng(34.0430, -118.2673),
+      myOptions = {
+              zoom: 7,
+              center: pointA
+            },
 
-var placesQueryURL = https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&types=food&name=harbour&key=AIzaSyATyZWwhsd6B4zceXSDcl2bdQ-dJh0aFrk*/
-=======
- function init_map() {
-		var var_location = new google.maps.LatLng(45.430817,12.331516);
- 
-        var var_mapoptions = {
-          center: var_location,
-          zoom: 14
-        };
- 
-		var var_marker = new google.maps.Marker({
-			position: var_location,
-			map: var_map,
-			title:"Venice"});
- 
-        var var_map = new google.maps.Map(document.getElementById("map-container"),
-            var_mapoptions);
- 
-		var_marker.setMap(var_map);	
- 
-      }
- 
-      google.maps.event.addDomListener(window, 'load', init_map);
->>>>>>> 182eb0cfde0781dd2d1c42606e64eddf8e6a6400
+        map = new google.maps.Map(document.getElementById('map'), myOptions),
+          // Put in coordinates for Los Angeles
+          // center: {lat: 34.0522, lng: -118.2437},
+          // Higher numbers zoom in more
+          // zoom: 10
+        // }),
+
+        directionsService = new google.maps.DirectionsService,
+        directionsDisplay = new google.maps.DirectionsRenderer({
+          map: map
+  //       }),
+    // markerA = new google.maps.Marker({
+  //           position: pointA,
+  //           title: "point A",
+  //           label: "A",
+  //           map: map
+  //       }),
+  //       markerB = new google.maps.Marker({
+  //           position: pointB,
+  //           title: "point B",
+  //           label: "B",
+  //           map: map
+        });
+    calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
+
+}
+
+
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+    directionsService.route({
+        origin: pointA,
+        destination: pointB,
+        avoidTolls: true,
+        avoidHighways: false,
+        travelMode: google.maps.TravelMode.DRIVING
+    }, function (response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+}
+
+initMap();
+/*    // CREATE TEST MARKER
+        var losAngeles = {lat: 34.0522, lng: -118.2437};
+        var marker = new google.maps.Marker({
+          position: losAngeles,
+          map: map,
+          title: 'test'
+        });
+    // SHOW INFO WHEN MARKER IS CLICKED
+      var markerInfo = new google.maps.InfoWindow({
+        content: 'A'
+      });
+      marker.addListener('click', function() {
+        markerInfo.open(map, marker);
+      })*/
+      // }
