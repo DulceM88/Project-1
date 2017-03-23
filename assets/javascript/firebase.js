@@ -31,9 +31,42 @@
 
   	console.log(newUser.name);
   	console.log(newUser.password);
-  	//console.log(newUser.favoritePlaces);
+  	// console.log(newUser.favoritePlaces);
 
 
   });
+
+//event listener for sign in button
+ $("#sign-in").on("click", function(event){
+    event.preventDefault(); 
+
+    var userName = $("#userName").val().trim();
+
+    dataRef.ref().once("value", function(snapshot){
+      snapshot.forEach(function(childSnapshot){
+        var childData = childSnapshot.val();
+        for (var prop in childData) {
+          if (childData [prop] === userName){
+            console.log(childSnapshot.key)
+          }
+        }
+      });
+    });
+
+
+
+    /*var query = firebase.database().ref("users").orderByKey();
+    query.once("value").then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      // key will be "ada" the first time and "alan" the second time
+      var key = childSnapshot.key;
+      // childData will be the actual contents of the child
+      var childData = childSnapshot.val();
+
+      console.log(key);
+      console.log(childData);
+  });*/
+});
+
 
 
