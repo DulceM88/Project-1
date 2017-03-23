@@ -1,86 +1,95 @@
-$("#place").hide();
-    // CREATE MAP
-var map;
-var directionsDisplay;
-var directionsService;
+
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 function initMap() {
-  var myOptions = {
-    zoom: 11,
-    center: {lat: 34.0522, lng: -118.2437}
-  },
-  map = new google.maps.Map(document.getElementById('map'), myOptions);
-  directionsService = new google.maps.DirectionsService();
-  directionsDisplay = new google.maps.DirectionsRenderer(
-  // {
-  //   map: map
-  // }
-  );
-  directionsDisplay.setMap(map);
-  directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+  var map = new google.maps.Map(document.getElementById('map'), {
+    mapTypeControl: false,
+    center: {lat: -33.8688, lng: 151.2195},
+    zoom: 13
+  });
+
+  new AutocompleteDirectionsHandler(map);
+}
+
+ /**
+  * @constructor
+ */
+function AutocompleteDirectionsHandler(map) {
+  this.map = map;
+  this.originPlaceId = null;
+  this.destinationPlaceId = null;
+  this.travelMode = 'WALKING';
+  var originInput = document.getElementById('origin-input');
+  var destinationInput = document.getElementById('destination-input');
+  var modeSelector = document.getElementById('mode-selector');
+  this.directionsService = new google.maps.DirectionsService;
+  this.directionsDisplay = new google.maps.DirectionsRenderer;
+  this.directionsDisplay.setMap(map);
+
+  var originAutocomplete = new google.maps.places.Autocomplete(
+      originInput, {placeIdOnly: true});
+  var destinationAutocomplete = new google.maps.places.Autocomplete(
+      destinationInput, {placeIdOnly: true});
+
+  this.setupClickListener('changemode-walking', 'WALKING');
+  this.setupClickListener('changemode-transit', 'TRANSIT');
+  this.setupClickListener('changemode-driving', 'DRIVING');
+
+  this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+  this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+
+  this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
+  this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
+  this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
+}
+
+// Sets a listener on a radio button to change the filter type on Places
+// Autocomplete.
+AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
+  var radioButton = document.getElementById(id);
+  var me = this;
+  radioButton.addEventListener('click', function() {
+    me.travelMode = mode;
+    me.route();
+  });
 };
 
-$("#submitButton").on("click", function(){
-  $(".userNav").hide();
-  $("#place").show();
-        var startPoint = $("#startPoint").val().trim();
-        console.log(startPoint);
-        var endPoint = $("#endPoint").val().trim();
-        var place = $("#place").val().trim();
-    calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint);
-    // displayDirections(startPoint, endPoint);
+AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+  var me = this;
+  autocomplete.bindTo('bounds', this.map);
+  autocomplete.addListener('place_changed', function() {
+    var place = autocomplete.getPlace();
+    if (!place.place_id) {
+      window.alert("Please select an option from the dropdown list.");
+      return;
+    }
+    if (mode === 'ORIG') {
+      me.originPlaceId = place.place_id;
+    } else {
+      me.destinationPlaceId = place.place_id;
+    }
+    me.route();
+  });
 
-      });
-
-function calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint) {
-    directionsService.route({
-        origin: startPoint,
-        destination: endPoint,
-        avoidTolls: true,
-        avoidHighways: false,
-        travelMode: google.maps.TravelMode.DRIVING
-    }, function (response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-            console.log(response);
-        } else {
-            window.alert('Directions request failed due to ' + status);
-        }
-    });
 };
 
+AutocompleteDirectionsHandler.prototype.route = function() {
+  if (!this.originPlaceId || !this.destinationPlaceId) {
+    return;
+  }
+  var me = this;
 
-/*function displayDirections(startPoint, endPoint) {
-  // var queryURL = "https://maps.googleapis.com/maps/api/directions/json?origin="+startPoint+"&destination="+endPoint+"&key=AIzaSyDegJxVf_X3LfYHpbD6xnUJiy-3NXit8hI";
-  var queryURL = "https://maps.googleapis.com/maps/api/directions/json?origin=ucla&destination=usc&key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE";
-  // var queryURL ="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE&callback=initMap";
-  
-  $.ajax({
-      url: queryURL,
-      method: "GET",
-    })
-        .done(function(response) {
-          var directionsData = response.data;
-          console.log(directionsData);
-          });
+  this.directionsService.route({
+    origin: {'placeId': this.originPlaceId},
+    destination: {'placeId': this.destinationPlaceId},
+    travelMode: this.travelMode
+  }, function(response, status) {
+    if (status === 'OK') {
+      me.directionsDisplay.setDirections(response);
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
 };
-
-
-
-
-$.ajax({
-            url: Auto_Complete_Link, 
-            type: "GET",   
-            dataType: 'jsonp',
-            cache: false,
-            success: function(response){                          
-                alert(response);                   
-            }           
-        });    */
-
-      var input = document.getElementById('startPoint');
-      var autocomplete = new google.maps.places.Autocomplete(input,{types: ['(cities)']});
-      google.maps.event.addListener(autocomplete, 'place_changed', function(){
-         var place = autocomplete.getPlace();
-      });
-    
