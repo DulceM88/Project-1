@@ -1,10 +1,30 @@
-.logo-car {
+<<<<<<< HEAD
+.navbar-brand {
+  height: 70px;
+
+}
+
+.nav >li >a {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.navbar-toggle {
+  padding: 10px;
+  margin: 25px 15px 25px 0;
+}
+#logo {
+  width: 50px;
   height: auto;
-  width: 75px;
   float: left;
-  margin-top: 0px;
-  padding: none;
-  position: relative;
+  margin: 0px;
+}
+.form-group{
+  float: left;
+}
+h3 {
+  font-size: 75px;
+  padding: 30px;
+  color: white;
 }
 
 
@@ -19,6 +39,7 @@
   border-radius:4px;
   -webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
+
 }
 a.navbar-brand.navbar-link{
   color: white;
@@ -51,6 +72,11 @@ a.navbar-brand.navbar-link{
   border-radius:0;
   box-shadow:none;
   border:none;
+  position: absolute;
+}
+
+#map-container {
+  margin-top: 50px;
 }
 
 
@@ -71,6 +97,7 @@ body {
 }
 .navbar-header {
   color: white;
+  width: 100%;
 }
 #display-map {
   padding: 30px;
@@ -93,7 +120,26 @@ body {
 .header-blue .navbar .navbar-form label {
   color:#ccc;
 }
+/*===============Map Container==============*/
+/*#map {
+    height: 50%;
+    background-color: blue;
 
+      }*/
+#map-container{
+  width: 100%;
+  height: 500px;
+  margin-top: 100px;
+  
+  background-image: url("assets/images/car-512.png");
+}
+
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
 
 #fav-list {
   float: left;
@@ -102,9 +148,10 @@ body {
 
 
 .footer-basic {
-  padding:40px 0;
-  background-color:#ffffff;
+  height:60px;
+  padding:20px 0;
   color:#4b4c4d;
+  margin-bottom: 0px;
 }
 
 .footer-basic ul {
@@ -153,7 +200,7 @@ body {
   opacity:0.9;
 }
 
-.footer-basic .copyright {
+footer .container .copyright {
   margin-top:15px;
   text-align:center;
   font-size:13px;
@@ -162,9 +209,9 @@ body {
 }
 
 div#main-section.container {
-  /*background:linear-gradient(135deg, #172a74, #21a9af);*/
-  /*background-color:#184e8e;*/
-  /*padding-bottom:120px;*/
+  background:linear-gradient(135deg, #172a74, #21a9af);
+  background-color:#184e8e;
+  padding-bottom:120px;
   color:#f0f0f0;
   font-family:'Source Sans Pro', sans-serif;
 }
@@ -218,3 +265,8 @@ div#main-section.container {
     padding-bottom:80px;
   }
 }
+
+
+
+
+
