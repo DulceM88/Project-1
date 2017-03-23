@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 .navbar-brand {
   height: 70px;
 
@@ -270,3 +271,14 @@ div#main-section.container {
 
 
 
+=======
+#map {
+	height: 100%;	
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+>>>>>>> 7b2060ae113bd62da2ff39fd31531fc1f939a40d
