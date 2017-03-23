@@ -1,70 +1,86 @@
-      var map;
-      function initMap() {
-        var pointA = new google.maps.LatLng(34.0522, -118.2437),
-          pointB = new google.maps.LatLng(34.0430, -118.2673),
-      myOptions = {
-              zoom: 7,
-              center: pointA
-            },
+$("#place").hide();
+    // CREATE MAP
+var map;
+var directionsDisplay;
+var directionsService;
 
-        map = new google.maps.Map(document.getElementById('map'), myOptions),
-          // Put in coordinates for Los Angeles
-          // center: {lat: 34.0522, lng: -118.2437},
-          // Higher numbers zoom in more
-          // zoom: 10
-        // }),
+function initMap() {
+  var myOptions = {
+    zoom: 11,
+    center: {lat: 34.0522, lng: -118.2437}
+  },
+  map = new google.maps.Map(document.getElementById('map'), myOptions);
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay = new google.maps.DirectionsRenderer(
+  // {
+  //   map: map
+  // }
+  );
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+};
 
-        directionsService = new google.maps.DirectionsService,
-        directionsDisplay = new google.maps.DirectionsRenderer({
-          map: map
-  //       }),
-    // markerA = new google.maps.Marker({
-  //           position: pointA,
-  //           title: "point A",
-  //           label: "A",
-  //           map: map
-  //       }),
-  //       markerB = new google.maps.Marker({
-  //           position: pointB,
-  //           title: "point B",
-  //           label: "B",
-  //           map: map
-        });
-    calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
+$("#submitButton").on("click", function(){
+  $(".userNav").hide();
+  $("#place").show();
+        var startPoint = $("#startPoint").val().trim();
+        console.log(startPoint);
+        var endPoint = $("#endPoint").val().trim();
+        var place = $("#place").val().trim();
+    calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint);
+    // displayDirections(startPoint, endPoint);
 
-}
+      });
 
-
-
-function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+function calculateAndDisplayRoute(directionsService, directionsDisplay, startPoint, endPoint) {
     directionsService.route({
-        origin: pointA,
-        destination: pointB,
+        origin: startPoint,
+        destination: endPoint,
         avoidTolls: true,
         avoidHighways: false,
         travelMode: google.maps.TravelMode.DRIVING
     }, function (response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
+            console.log(response);
         } else {
             window.alert('Directions request failed due to ' + status);
         }
     });
-}
+};
 
-initMap();
-/*    // CREATE TEST MARKER
-        var losAngeles = {lat: 34.0522, lng: -118.2437};
-        var marker = new google.maps.Marker({
-          position: losAngeles,
-          map: map,
-          title: 'test'
-        });
-    // SHOW INFO WHEN MARKER IS CLICKED
-      var markerInfo = new google.maps.InfoWindow({
-        content: 'A'
+
+/*function displayDirections(startPoint, endPoint) {
+  // var queryURL = "https://maps.googleapis.com/maps/api/directions/json?origin="+startPoint+"&destination="+endPoint+"&key=AIzaSyDegJxVf_X3LfYHpbD6xnUJiy-3NXit8hI";
+  var queryURL = "https://maps.googleapis.com/maps/api/directions/json?origin=ucla&destination=usc&key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE";
+  // var queryURL ="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE&callback=initMap";
+  
+  $.ajax({
+      url: queryURL,
+      method: "GET",
+    })
+        .done(function(response) {
+          var directionsData = response.data;
+          console.log(directionsData);
+          });
+};
+
+
+
+
+$.ajax({
+            url: Auto_Complete_Link, 
+            type: "GET",   
+            dataType: 'jsonp',
+            cache: false,
+            success: function(response){                          
+                alert(response);                   
+            }           
+        });    */
+
+      var input = document.getElementById('startPoint');
+      var autocomplete = new google.maps.places.Autocomplete(input,{types: ['(cities)']});
+      google.maps.event.addListener(autocomplete, 'place_changed', function(){
+         var place = autocomplete.getPlace();
       });
-      marker.addListener('click', function() {
-        markerInfo.open(map, marker);
-      })*/
-      // }
+    
