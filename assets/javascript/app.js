@@ -5,8 +5,8 @@
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           mapTypeControl: false,
-          center: {lat: -33.8688, lng: 151.2195},
-          zoom: 13
+          center: {lat: 34.0522, lng: -118.2437},
+          zoom: 12
         });
 
         new AutocompleteDirectionsHandler(map);
@@ -20,8 +20,8 @@
         this.originPlaceId = null;
         this.destinationPlaceId = null;
         this.travelMode = 'WALKING';
-        var originInput = document.getElementById('origin-input');
-        var destinationInput = document.getElementById('destination-input');
+        var originInput = document.getElementById('startPoint');
+        var destinationInput = document.getElementById('endPoint');
         var modeSelector = document.getElementById('mode-selector');
         this.directionsService = new google.maps.DirectionsService;
         this.directionsDisplay = new google.maps.DirectionsRenderer;
