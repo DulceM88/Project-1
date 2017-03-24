@@ -5,8 +5,8 @@
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           mapTypeControl: false,
-          center: {lat: -33.8688, lng: 151.2195},
-          zoom: 13
+          center: {lat: 34.0522, lng: -118.2437},
+          zoom: 12
         });
 
         new AutocompleteDirectionsHandler(map);
@@ -19,22 +19,24 @@
         this.map = map;
         this.originPlaceId = null;
         this.destinationPlaceId = null;
-        this.travelMode = 'WALKING';
-        var originInput = document.getElementById('origin-input');
-        var destinationInput = document.getElementById('destination-input');
+        this.travelMode = 'DRIVING';
+        var originInput = document.getElementById('startPoint');
+        var destinationInput = document.getElementById('endPoint');
         var modeSelector = document.getElementById('mode-selector');
         this.directionsService = new google.maps.DirectionsService;
         this.directionsDisplay = new google.maps.DirectionsRenderer;
         this.directionsDisplay.setMap(map);
+        // Show step by step directions
+        this.directionsDisplay.setPanel(document.getElementById('directionsText'));
 
         var originAutocomplete = new google.maps.places.Autocomplete(
             originInput, {placeIdOnly: true});
         var destinationAutocomplete = new google.maps.places.Autocomplete(
             destinationInput, {placeIdOnly: true});
 
+        this.setupClickListener('changemode-driving', 'DRIVING');
         this.setupClickListener('changemode-walking', 'WALKING');
         this.setupClickListener('changemode-transit', 'TRANSIT');
-        this.setupClickListener('changemode-driving', 'DRIVING');
 
         this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
         this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
