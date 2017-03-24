@@ -166,12 +166,25 @@ var longitude;
               stopover: true
             });
 
-        
+// =======================CLEAN THIS UP
+        if (latitude === undefined) {
+          this.directionsService.route({
+            origin: {'placeId': this.originPlaceId},
+            destination: {'placeId': this.destinationPlaceId},
+            travelMode: this.travelMode
+          }, function(response, status) {
+            if (status === 'OK') {
+              me.directionsDisplay.setDirections(response);
+            } else {
+              window.alert('Directions request failed due to ' + status);
+            }
+          });
+        }
+        else {
         this.directionsService.route({
           origin: {'placeId': this.originPlaceId},
           waypoints: waypts,
           destination: {'placeId': this.destinationPlaceId},
-          
           travelMode: this.travelMode
         }, function(response, status) {
           if (status === 'OK') {
@@ -180,10 +193,8 @@ var longitude;
             window.alert('Directions request failed due to ' + status);
           }
         });
+        }
+// ===================================================================================
 
 
-        // ====================================NEW
-
-
-        // ========================================END
       };
