@@ -3,15 +3,35 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    mapTypeControl: false,
-    center: {lat: -33.8688, lng: 151.2195},
-    zoom: 13
-  });
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          mapTypeControl: false,
+          center: {lat: 34.0522, lng: -118.2437},
+          zoom: 12
+        });
+
+
 
   new AutocompleteDirectionsHandler(map);
 }
+
+       /**
+        * @constructor
+       */
+      function AutocompleteDirectionsHandler(map) {
+        this.map = map;
+        this.originPlaceId = null;
+        this.destinationPlaceId = null;
+        this.travelMode = 'DRIVING';
+        var originInput = document.getElementById('startPoint');
+        var destinationInput = document.getElementById('endPoint');
+        var modeSelector = document.getElementById('mode-selector');
+        this.directionsService = new google.maps.DirectionsService;
+        this.directionsDisplay = new google.maps.DirectionsRenderer;
+        this.directionsDisplay.setMap(map);
+        // Show step by step directions
+        this.directionsDisplay.setPanel(document.getElementById('directionsText'));
+
 
  /**
   * @constructor
@@ -33,9 +53,12 @@ function AutocompleteDirectionsHandler(map) {
   var destinationAutocomplete = new google.maps.places.Autocomplete(
       destinationInput, {placeIdOnly: true});
 
-  this.setupClickListener('changemode-walking', 'WALKING');
-  this.setupClickListener('changemode-transit', 'TRANSIT');
-  this.setupClickListener('changemode-driving', 'DRIVING');
+        this.setupClickListener('changemode-driving', 'DRIVING');
+        this.setupClickListener('changemode-walking', 'WALKING');
+        this.setupClickListener('changemode-transit', 'TRANSIT');
+
+
+ 
 
   this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
   this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
