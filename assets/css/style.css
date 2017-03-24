@@ -226,7 +226,6 @@ html, body {
 
 /*=============FOOTER================*/
 .footer-basic {
-  overflow: auto;
   height:60px;
   padding:20px 0;
   color:#4b4c4d;
