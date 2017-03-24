@@ -1,24 +1,22 @@
- // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+var latitude;
+var longitude;
 
-
-// =====================================================================NEW
-// This global polygon variable is to ensure only ONE polygon is rendered.
-/*      var polygon = null;*/
-
-// ======================================================================NEW END
-
+      // CREATE MAP
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
+          // So you can't change to satellite view
           mapTypeControl: false,
+          // Sets Los Angeles as the map center
           center: {lat: 34.0522, lng: -118.2437},
-          zoom: 12
+          // Higher number, more zoomed in
+          zoom: 12,
+          // Creates map button to toggle full screen
+          fullscreenControl: true
         });
 
         new AutocompleteDirectionsHandler(map);
 
-        // ==========================================================NEW
+        // ========================================================== ADD PLACES TO THE MAP
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -47,6 +45,7 @@
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
           places.forEach(function(place) {
+            // console.log(place);
             if (!place.geometry) {
               console.log("Returned place contains no geometry");
               return;
@@ -60,13 +59,23 @@
             };
 
             // Create a marker for each place.
-            markers.push(new google.maps.Marker({
+            var marker = new google.maps.Marker({
               map: map,
               icon: icon,
               title: place.name,
               position: place.geometry.location
-            }));
+            });
+            markers.push(marker);
 
+          // ---------------------------------------------------------- CLICK MARKERS TO GET LAT/LNG
+          marker.addListener('click', function(event) {
+            latitude = event.latLng.lat();
+            longitude = event.latLng.lng();
+            coordinates = {lat: latitude, lng: longitude};
+            console.log( latitude + ', ' + longitude );
+            console.log(coordinates);
+          });
+          // -----------------------------------------------------------
             if (place.geometry.viewport) {
               // Only geocodes have viewport.
               bounds.union(place.geometry.viewport);
@@ -76,25 +85,10 @@
           });
           map.fitBounds(bounds);
         });
+// =========================================================================End add places
 
-
-
-/*        var drawingManager = new google.maps.drawing.DrawingManager({
-          drawingMode: google.maps.drawing.OverlayType.POLYGON,
-          drawingControl: true,
-          drawingControlOptions: {
-            position: google.maps.ControlPosition.TOP_LEFT,
-            drawingModes: [
-              google.maps.drawing.OverlayType.POLYGON
-            ]
-          }
-        });
-      }*/
-      // ===========================================================NEW END
 }
-       /**
-        * @constructor
-       */
+
       function AutocompleteDirectionsHandler(map) {
         this.map = map;
         this.originPlaceId = null;
@@ -103,6 +97,7 @@
         var originInput = document.getElementById('startPoint');
         var destinationInput = document.getElementById('endPoint');
         var modeSelector = document.getElementById('mode-selector');
+        // console.log(coordinates);
         this.directionsService = new google.maps.DirectionsService;
         this.directionsDisplay = new google.maps.DirectionsRenderer;
         this.directionsDisplay.setMap(map);
@@ -128,9 +123,13 @@
 
       // Sets a listener on a radio button to change the filter type on Places
       // Autocomplete.
+
+      // Every JavaScript object has a prototype. The prototype is also an object. 
+      // All JavaScript objects inherit their properties and methods from their prototype.
       AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
         var radioButton = document.getElementById(id);
         var me = this;
+        // console.log(me);
         radioButton.addEventListener('click', function() {
           me.travelMode = mode;
           me.route();
@@ -161,10 +160,18 @@
           return;
         }
         var me = this;
+        var waypts = [];
+            waypts.push({
+              location: new google.maps.LatLng(latitude,longitude),
+              stopover: true
+            });
 
+        
         this.directionsService.route({
           origin: {'placeId': this.originPlaceId},
+          waypoints: waypts,
           destination: {'placeId': this.destinationPlaceId},
+          
           travelMode: this.travelMode
         }, function(response, status) {
           if (status === 'OK') {
@@ -173,4 +180,10 @@
             window.alert('Directions request failed due to ' + status);
           }
         });
+
+
+        // ====================================NEW
+
+
+        // ========================================END
       };
