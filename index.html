@@ -1,52 +1,37 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Along the Way</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
+ <head>
+   <title>Along the Way</title>
+   <meta name="viewport" content="initial-scale=1.0">
+   <meta charset="utf-8">
+   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+ </head>
+ <body>
+    <input id="startPoint" class="controls" type="text"
+       placeholder="Enter an origin location">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <input id="endPoint" class="controls" type="text"
+       placeholder="Enter a destination location">
 
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+   <div id="mode-selector" class="controls">
+     <input type="radio" name="type" id="changemode-driving" checked="checked">
+     <label for="changemode-driving">Driving</label>
 
+     <input type="radio" name="type" id="changemode-walking">
+     <label for="changemode-walking">Walking</label>
 
-<link rel="icon" href="assets/images/favicon1.ico" type="image/ico">
-  <!--Leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-      <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-  </head>
+     <input type="radio" name="type" id="changemode-transit">
+     <label for="changemode-transit">Transit</label>
+   </div>
 
-
-
-  <body>
-
-     <input id="startPoint" class="controls" type="text"
-        placeholder="Enter an origin location">
-
-    <input id="endPoint" class="controls" type="text"
-        placeholder="Enter a destination location">
-
-
-
-    <div id="mode-selector" class="controls">
-      <input type="radio" name="type" id="changemode-walking" checked="checked">
-      <label for="changemode-walking">Walking</label>
-
-      <input type="radio" name="type" id="changemode-transit">
-      <label for="changemode-transit">Transit</label>
-
-      <input type="radio" name="type" id="changemode-driving">
-      <label for="changemode-driving">Driving</label>
-    </div>
-
-    <div id="map"></div>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE&libraries=places&callback=initMap" async defer></script>    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE&callback=initMap&libraries=places"></script> -->
-      <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE&libraries=places&language=en"></script> -->
-    <script src="assets/javascript/app.js"></script>
-  </body>
+   <div id="map"></div>
+   <div id="directionsText"></div>
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE&libraries=places&callback=initMap" async defer></script>    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE&callback=initMap&libraries=places"></script> -->
+     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE&libraries=places&language=en"></script> -->
+   <script src="assets/javascript/app.js"></script>
+ </body>
 
 </html>
 
