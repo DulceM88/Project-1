@@ -15,9 +15,9 @@
   new AutocompleteDirectionsHandler(map);
 }
 
-       /**
-        * @constructor
-       */
+       
+        
+       
       function AutocompleteDirectionsHandler(map) {
         this.map = map;
         this.originPlaceId = null;
@@ -33,9 +33,7 @@
         this.directionsDisplay.setPanel(document.getElementById('directionsText'));
 
 
- /**
-  * @constructor
- */
+ 
 function AutocompleteDirectionsHandler(map) {
   this.map = map;
   this.originPlaceId = null;
