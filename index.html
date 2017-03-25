@@ -1,49 +1,101 @@
-<!DOCTYPE>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<!DOCTYPE html>
+<html>
+<head>
     <title>Along the Way</title>
-    <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-  </head>
-  <body>
-  	<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Along the Way</a>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,700,400italic,300italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
+    <!--Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+</head>
+<body>
+    
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <header class="header-blue"><div class="container">
+                <div class="navbar-header">
+                   
+                    <a style="display:inline-block" class="navbar-brand" href="index.html"><img src="assets/images/car-512.png" id="logo" alt="Logo">
+                    </a><a style="display:inline-block" class="navbar-brand" href="index.html">Along the Way</a>
+                    <div class="header-inputs">
+                    <div class="form-group">
+                        <!-- <input type="text"  id="add-place" placeholder="Add Place" class="form-control"> -->
+                    <input type="text" id="pac-input" class="form-control"  placeholder="Add Place">
+                    </div>
+                    <div class="form-group">
+                    <input type="text"  placeholder="Email" class="form-control"></div>
+                    <div class="form-group">
+                    <button type="submit" id="submit" class="btn btn-success">Submit</button>
+                    </div>
+                    <div class="form-group">
+                    <button type="update" id="update" class="btn btn-success">Update</button>
+                    </div>
+                </div>
+        
+    </header></nav>
+<!-- <div class="map-container"> -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <p> This is where the map will go</p>
+                </div>
+            
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control" id="userName">
+    </div>
+    
+    <div id="map">
+    </div>
+        <div class="row">
+            <div class="col-md-4">
+            <div class="directionsDiv">
+                <div id="directionsText">
+                </div></div>
+                <div class="col-md-8">
+                    <div class="input-map">
+                    <br><br>
+                        
+                        <input id="startPoint" class="controls" type="text" placeholder="Enter an origin location">
+                        <input id="endPoint" class="controls" type="text" placeholder="Enter a destination location">
+                        <div id="mode-selector" class="controls">
+                            <input type="radio" name="type" id="changemode-driving" checked="checked">
+                            <label for="changemode-driving">Driving</label>
+                            <input type="radio" name="type" id="changemode-walking">
+                            <label for="changemode-walking">Walking</label>
+                            <input type="radio" name="type" id="changemode-transit">
+                            <label for="changemode-transit">Transit</label>
+                        </div>
+                    </div>
+                </div></div>
             </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control" id="password">
-            </div>
-            <button type="submit" class="btn btn-success" id ="submit">Sign in</button>
-             <button type="submit" class="btn btn-success" id ="sign-in">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
-    <div id="map"></div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script src="assets/javascript/app.js"></script>
-  <script src="assets/javascript/firebase.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE&callback=initMap"
-    async defer></script>
+            
+    <div class="container-fluid">
+        <div class="footer-basic">
+            <div class="social"></div>
+            <ul class="list-inline">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="team.html">Team</a></li>
+            </ul>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <p class="copyright">Along the Way © 2017</p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE&libraries=places&callback=initMap" async defer></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE&callback=initMap&libraries=places"></script> -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa6UbdkpS7nDN751ZkOWIYdfG1Rk7tmuE&libraries=places&language=en"></script> -->
+    <script src="assets/javascript/app.js"></script>
+    <script src="assets/javascript/firebase.js"</script>
 </body>
 </html>

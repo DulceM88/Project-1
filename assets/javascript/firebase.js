@@ -17,55 +17,51 @@
   	event.preventDefault();
 
   	var userName = $("#userName").val().trim();
-  	var password = $("#password").val().trim();
-  	//var favoritePlaces = $("#addStop").val().trim();
+  	var favoritePlaces = $("#pac-input").val().trim();
 
   var newUser = {
   	name: userName,
-  	password: password,
-  	//favorites: favoritePlaces
+  	favorites: [favoritePlaces]
 
   };
 
   database.ref().push(newUser);
 
   	console.log(newUser.name);
-  	console.log(newUser.password);
-  	// console.log(newUser.favoritePlaces);
+  	
+  	console.log(newUser.favoritePlaces);
 
 
   });
 
-//event listener for sign in button
- $("#sign-in").on("click", function(event){
+//event listener for updating favorites
+ $("#update").on("click", function(event){
     event.preventDefault(); 
 
     var userName = $("#userName").val().trim();
+    var favoritePlaces = $("#pac-input").val().trim();
 
-    dataRef.ref().once("value", function(snapshot){
+    var theKey = "";
+    database.ref().once("value", function(snapshot){
       snapshot.forEach(function(childSnapshot){
         var childData = childSnapshot.val();
         for (var prop in childData) {
           if (childData [prop] === userName){
+            console.log("found it!");
             console.log(childSnapshot.key)
+            theKey = childSnapshot.key;
           }
         }
       });
     });
 
+    var updateRef= database.ref().child(theKey);
+    updateRef.update({
+      "favorites": favoritePlaces.push();
+    });
 
 
-    /*var query = firebase.database().ref("users").orderByKey();
-    query.once("value").then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      // key will be "ada" the first time and "alan" the second time
-      var key = childSnapshot.key;
-      // childData will be the actual contents of the child
-      var childData = childSnapshot.val();
-
-      console.log(key);
-      console.log(childData);
-  });*/
+   
 });
 
 
