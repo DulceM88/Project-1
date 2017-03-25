@@ -143,6 +143,10 @@ p {
 }*/
   
 }
+.how-to {
+  margin-top: 120px;
+  background-color: black;
+}
 
       /* Optional: Makes the sample page fill the window. */
       html, body {

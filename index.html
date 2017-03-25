@@ -26,12 +26,16 @@
                     </a><a style="display:inline-block" class="navbar-brand" href="index.html">Along the Way</a>
                     <div class="header-inputs">
                     <div class="form-group">
-                        <input type="text"  id="add-place" placeholder="Add Place" class="form-control">
+                        <!-- <input type="text"  id="add-place" placeholder="Add Place" class="form-control"> -->
+                        <input type="text" id="pac-input" class="form-control"  placeholder="Add Place">
                     </div>
                     <div class="form-group">
                         <input type="text"  placeholder="Email" class="form-control"></div>
                     <div class="form-group">
                     <button type="submit" id="submit" class="btn btn-success">Submit</button>
+                    </div>
+                    <div class="form-group">
+                    <button type="update" id="update" class="btn btn-success">Update</button>
                     </div>
                 </div>
         
@@ -62,7 +66,7 @@
                 <div class="col-md-8">
                     <div class="input-map">
                     <br><br>
-                        <input id="pac-input" class="controls" type="text" placeholder="Place">
+                        
                         <input id="startPoint" class="controls" type="text" placeholder="Enter an origin location">
                         <input id="endPoint" class="controls" type="text" placeholder="Enter a destination location">
                         <div id="mode-selector" class="controls">
