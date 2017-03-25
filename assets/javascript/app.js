@@ -23,7 +23,7 @@ function initMap() {
  // google.maps.places.SearchBox class provides query predictions based on text entry listeners
  var searchBox = new google.maps.places.SearchBox(input);
  // Positions the search box to the top left of map
- map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+ // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
  // Bias the SearchBox results towards current map's viewport.
  map.addListener('bounds_changed', function() {
@@ -93,6 +93,7 @@ function initMap() {
  });
 // ================================= End of add places =================================
 }
+
 // ======================== End of initMap(); Start directions =========================
 // Object constructor function
 function AutocompleteDirectionsHandler(map) {
