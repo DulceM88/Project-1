@@ -35,7 +35,9 @@ function initMap() {
   // more details for that place.
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
-    console.log(places[0].name);
+    var placeName = places[0].name;
+    // console.log(places[0].name);
+
     if (places.length == 0) {
       return;
     }
